@@ -1,3 +1,13 @@
+import { CoffeComponent } from '../../components/CoffeComponent'
+import { coffees } from '../../utils/data.cofe'
+console.log(coffees)
+
 export function Home() {
-  return <h1>Home</h1>
+  return (
+    <div>
+      {coffees.map((coffe) => (
+        <CoffeComponent key={coffe.id} coffe={coffe} />
+      ))}
+    </div>
+  )
 }
