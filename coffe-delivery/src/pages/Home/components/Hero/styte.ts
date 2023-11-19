@@ -7,14 +7,14 @@ export const CoffeInfos = styled.section`
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
-  height: 700px;
+  height: 600px;
   padding-bottom: 150px;
   padding-inline: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  gap: 50px;
+  gap: 300px;
   > .left {
     max-width: 600px;
 

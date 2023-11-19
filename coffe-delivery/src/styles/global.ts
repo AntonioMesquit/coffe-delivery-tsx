@@ -29,8 +29,15 @@ body, input, textarea, button{
     font-size: 1rem;
 
 }
+button{
+    cursor: pointer;
+}
 a{
     text-decoration: none;
 }
 
+:focus{
+    outline: 0;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.purple};
+}
 `
