@@ -1,47 +1,24 @@
-import { formatMoney } from '../../utils/formatMoney'
-import { useState } from 'react'
-import { Minus, Plus } from '@phosphor-icons/react'
-import Cart from '../../assets/coffees/Icon.svg'
-import { CoffeContainer } from './styles'
-
-interface Coffe {
-  id: number
-  name: string
-  img: string
-  description: string
-  photo: string
-  price: number
-  tags: string[]
-}
+import React, { useContext } from 'react';
+import { formatMoney } from '../../../../utils/formatMoney';
+import { Minus, Plus } from '@phosphor-icons/react';
+import Cart from '../../../../assets/coffees/Icon.svg';
+import { CoffeContainer } from './styles';
+import { CoffeContext } from '../../../../contexts/CoffeContext';
 
 interface CoffeProps {
-  coffe: Coffe
-  onSelectCoffe: () => void
-  onRemoveCoffe: () => void
+  coffe: Coffe;
 }
 
-export function CoffeComponent({
-  coffe,
-  onSelectCoffe,
-  onRemoveCoffe,
-}: CoffeProps) {
-  const precoFormatado = formatMoney(coffe.price)
-  const [itens, setItens] = useState(0)
+export function CoffeComponent({ coffe }: CoffeProps) {
+  const precoFormatado = formatMoney(coffe.price);
+  const { handleSelectCoffe, handleRemoveCoffe } = useContext(CoffeContext);
 
   function handleAddItens() {
-    if (itens >= 99) {
-      return
-    }
-    setItens(itens + 1)
-    onSelectCoffe()
+    handleSelectCoffe(coffe);
   }
 
   function handleRemoveItens() {
-    if (itens === 0) {
-      return
-    }
-    setItens(itens - 1)
-    onRemoveCoffe()
+    handleRemoveCoffe(coffe);
   }
 
   return (
@@ -62,7 +39,7 @@ export function CoffeComponent({
           <button onClick={handleRemoveItens}>
             <Minus size={14} color="#8047F8" />
           </button>
-          <p>{itens}</p>
+          <p>{coffe.quantity || 0}</p>
           <button onClick={handleAddItens}>
             <Plus size={14} color="#8047F8" />
           </button>
@@ -72,5 +49,5 @@ export function CoffeComponent({
         </button>
       </div>
     </CoffeContainer>
-  )
+  );
 }
