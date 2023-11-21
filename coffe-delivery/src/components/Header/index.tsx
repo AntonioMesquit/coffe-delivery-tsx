@@ -1,21 +1,31 @@
 import imageIcon from '../../assets/icon.svg'
 import { MapPin, ShoppingCart } from '@phosphor-icons/react'
 import { Container } from './styles'
+import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { CoffeContext } from '../../contexts/CoffeContext'
+
 export function Header() {
+  const { coffes: contextCoffes } = useContext(CoffeContext)
+
   return (
     <Container>
-      <a href="/">
+      <Link to="/">
         <img src={imageIcon} alt="" />
-      </a>
+      </Link>
 
       <div className="right">
         <a href="#">
           <MapPin /> Fortaleza, CE
         </a>
-        <a href="/carrinho">
+        <Link to="/carrinho">
           <ShoppingCart color="#C47F17" size={24} />
-          <span>1</span>
-        </a>
+          {contextCoffes.length !== 0 ? (
+            <span>{contextCoffes.length}</span>
+          ) : (
+            <span style={{ display: 'none' }}></span>
+          )}
+        </Link>
       </div>
     </Container>
   )

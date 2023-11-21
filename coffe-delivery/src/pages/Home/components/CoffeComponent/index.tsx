@@ -1,24 +1,27 @@
-import React, { useContext } from 'react';
-import { formatMoney } from '../../../../utils/formatMoney';
-import { Minus, Plus } from '@phosphor-icons/react';
-import Cart from '../../../../assets/coffees/Icon.svg';
-import { CoffeContainer } from './styles';
-import { CoffeContext } from '../../../../contexts/CoffeContext';
+import React, { useContext } from 'react'
+import { formatMoney } from '../../../../utils/formatMoney'
+import { Minus, Plus } from '@phosphor-icons/react'
+import Cart from '../../../../assets/coffees/Icon.svg'
+import { CoffeContainer } from './styles'
+import { CoffeContext } from '../../../../contexts/CoffeContext'
 
 interface CoffeProps {
-  coffe: Coffe;
+  coffe: Coffe
 }
 
 export function CoffeComponent({ coffe }: CoffeProps) {
-  const precoFormatado = formatMoney(coffe.price);
-  const { handleSelectCoffe, handleRemoveCoffe } = useContext(CoffeContext);
+  const precoFormatado = formatMoney(coffe.price)
+  const { handleSelectCoffe, handleRemoveCoffe, coffes } =
+    useContext(CoffeContext)
+
+  const selectedCoffe = coffes.find((item) => item.id === coffe.id)
 
   function handleAddItens() {
-    handleSelectCoffe(coffe);
+    handleSelectCoffe(coffe)
   }
 
   function handleRemoveItens() {
-    handleRemoveCoffe(coffe);
+    handleRemoveCoffe(coffe)
   }
 
   return (
@@ -39,7 +42,7 @@ export function CoffeComponent({ coffe }: CoffeProps) {
           <button onClick={handleRemoveItens}>
             <Minus size={14} color="#8047F8" />
           </button>
-          <p>{coffe.quantity || 0}</p>
+          <p>{selectedCoffe?.quantity || 0}</p>
           <button onClick={handleAddItens}>
             <Plus size={14} color="#8047F8" />
           </button>
@@ -49,5 +52,5 @@ export function CoffeComponent({ coffe }: CoffeProps) {
         </button>
       </div>
     </CoffeContainer>
-  );
+  )
 }
