@@ -4,6 +4,7 @@ import { Minus, Plus } from '@phosphor-icons/react'
 import Cart from '../../../../assets/coffees/Icon.svg'
 import { CoffeContainer } from './styles'
 import { CoffeContext } from '../../../../contexts/CoffeContext'
+import { useNavigate } from 'react-router-dom'
 
 interface CoffeProps {
   coffe: Coffe
@@ -15,7 +16,7 @@ export function CoffeComponent({ coffe }: CoffeProps) {
     useContext(CoffeContext)
 
   const selectedCoffe = coffes.find((item) => item.id === coffe.id)
-
+  const navigate = useNavigate()
   function handleAddItens() {
     handleSelectCoffe(coffe)
   }
@@ -47,7 +48,7 @@ export function CoffeComponent({ coffe }: CoffeProps) {
             <Plus size={14} color="#8047F8" />
           </button>
         </div>
-        <button>
+        <button onClick={() => navigate('/carrinho')}>
           <img src={Cart} alt="" />
         </button>
       </div>
